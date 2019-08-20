@@ -34,9 +34,9 @@ npm i chatitio --save
 - intent
 以`%`开始，是生成预料的起点也是生成对话的标签，不允许有重复的`intent`。
 - slot
-以`@`开始。一个`slot`可以包含多个`alias`。
+以`@`开始。一个`slot`可以包含多个`alias`。会生成关于这个slot的标签。如`{"type":"Slot","value":"Bob","slot":"name"}]`。
 - alias
-以`~`开始。
+以`~`开始。和`slot`的区别在于不生成标签。
 
 ### 在Rasa中的使用：
 ```
@@ -50,11 +50,11 @@ npm i chatitio --save
     synonym 1
     synonym 2
 ```
-Rasa适配器的一个特定行为是，当`slot`定义语句仅包含一个`alias`时，生成的Rasa数据集将会把这个别名映射为同义词。
+Rasa适配器的一个特定行为是，当`slot`定义语句仅包含一个`alias`时，生成的Rasa数据集将会把这个`alias`映射为同义词。
 在示例中，生成的Rasa数据集将包含`synonym 1`和`synonym 2`的`entity_synonyms`映射到`some slot synonyms`。
 
 ## 使用Chatito生成Rasa数据集
-trainBot.chatito
+#### trainBot.chatito
 ```
 %[request_search]('training': '420')
     ~[greet?] ~[please?] ~[find?] @[time?] @[item] ~[how_much?]
@@ -239,7 +239,7 @@ trainBot.chatito
 
 ```
 
-运行npm生成器：
+#### 运行npm生成器：
 `npx chatito trainBot.chatito --format==rasa`
 
 完整的参数如下：
@@ -260,7 +260,7 @@ npx chatito <pathToFileOrDirectory> --format=<format> --formatOptions=<formatOpt
 
 最后可以得到`rasa_dataset_traning.json`和`rasa_dataset_testing`两个文件。
 
-rasa_dataset_traning.json里面的内容如下:
+#### rasa_dataset_traning.json里面的内容如下:
 ```
 {"rasa_nlu_data":{"regex_features":[],"entity_synonyms":[],"common_examples":[{"text":"嗨 看一看 十月 18810397783 有多少","intent":"request_search","entities":[{"end":8,"entity":"time","start":6,"value":"十月"},{"end":20,"entity":"phone_number","start":9,"value":"18810397783"}]}
 ```
