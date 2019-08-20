@@ -10,7 +10,7 @@ npm i chatitio --save
 `
 
 ## 如何编辑Chatito文件
-###示例：  
+### 示例：  
 ```
 %[greet]('training': '2')
     ~[hi] @[name?] ~[whatsUp?]
